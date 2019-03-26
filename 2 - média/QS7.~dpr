@@ -1,0 +1,45 @@
+program QS7;
+
+{$APPTYPE CONSOLE}
+
+uses
+  uTroco in 'uTroco.pas',
+  uIMaquina in 'uIMaquina.pas',
+  uMaquina in 'uMaquina.pas',
+
+  Classes,
+  SysUtils;
+
+{$R *.RES}
+
+var
+  vMaquinaTroco : TMaquina;
+  vValorTroco   : Double;
+  vTrocoList    : TList;
+  vI            : Integer;
+  vTroco        : TTroco;
+begin
+  vMaquinaTroco := TMaquina.Create;
+    try
+      while True do
+        begin
+          Readln(vValorTroco);
+
+          vTrocoList := vMaquinaTroco.MontarTroco(vValorTroco);
+
+          if vTrocoList.Count > 0 then
+            begin
+              for vI := 0 to vTrocoList.Count -1 do
+                begin
+                 vTroco := vTrocoList[vI];
+                 Writeln(IntToStr(vTroco.Quantidade) + ' nota de ' + FloatToStr(CValorCedula[vTroco.Tipo]));
+                end;
+            end;
+        end;
+
+    finally
+      vMaquinaTroco.Free;
+    end;
+end.
+
+
